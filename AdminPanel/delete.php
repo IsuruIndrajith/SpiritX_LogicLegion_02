@@ -2,14 +2,14 @@
 // delete.php
 require_once 'includes/db.php';
 
-if (!isset($_GET['id'])) {
-    echo "Player ID not provided.";
+if (!isset($_GET['player_name'])) {
+    echo "Player name not provided.";
     exit;
 }
 
-$id = intval($_GET['id']);
+$playerName = $conn->real_escape_string($_GET['player_name']);
 
-$sql = "DELETE FROM players WHERE id=$id";
+$sql = "DELETE FROM sample_data WHERE `COL 1`='$playerName'";
 if ($conn->query($sql) === TRUE) {
     // Redirect back to the index page after deletion.
     header("Location: index.php");
