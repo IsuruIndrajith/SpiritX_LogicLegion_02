@@ -3,7 +3,7 @@
 require_once 'includes/db.php';
 include 'includes/header.php';
 
-// Calculate overall statistics.
+// Calculate overall statistics
 $sql = "SELECT 
             SUM(`COL 4`) AS total_runs,
             AVG(`COL 4`) AS avg_runs,
@@ -12,6 +12,25 @@ $sql = "SELECT
         FROM sample_data";
 $result = $conn->query($sql);
 $summary = $result->fetch_assoc();
+
+
+// Determine highest run-scorer
+$sql_highest_runs = "SELECT `COL 1` AS player_name, `COL 4` AS total_runs
+                     FROM sample_data
+                     ORDER BY `COL 4` DESC
+                     LIMIT 1 OFFSET 1";
+$result_highest_runs = $conn->query($sql_highest_runs);
+$highest_run_scorer = $result_highest_runs->fetch_assoc();
+
+
+// Determine highest wicket-taker
+$sql_highest_wickets = "SELECT `COL 1` AS player_name, `COL 7` AS total_wickets
+                        FROM sample_data
+                        ORDER BY `COL 7` DESC
+                        LIMIT 1 OFFSET 1";
+$result_highest_wickets = $conn->query($sql_highest_wickets);
+$highest_wicket_taker = $result_highest_wickets->fetch_assoc();
+
 ?>
 
 <h2>Tournament Summary</h2>
@@ -31,6 +50,14 @@ $summary = $result->fetch_assoc();
     <tr>
         <th>Total Wickets</th>
         <td><?php echo htmlspecialchars($summary['total_wickets']); ?></td>
+    </tr>
+    <tr>
+        <th>Highest Run-Scorer</th>
+        <td><?php echo htmlspecialchars($highest_run_scorer['player_name']) . " (" . htmlspecialchars($highest_run_scorer['total_runs']) . " runs)"; ?></td>
+    </tr>
+    <tr>
+        <th>Highest Wicket-Taker</th>
+        <td><?php echo htmlspecialchars($highest_wicket_taker['player_name']) . " (" . htmlspecialchars($highest_wicket_taker['total_wickets']) . " wickets)"; ?></td>
     </tr>
 </table>
 
