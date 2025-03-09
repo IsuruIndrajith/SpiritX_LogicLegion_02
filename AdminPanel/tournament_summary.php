@@ -5,9 +5,9 @@ include 'includes/header.php';
 
 // Calculate overall statistics
 $sql = "SELECT 
-            SUM(`COL 4`) AS total_runs,
-            AVG(`COL 4`) AS avg_runs,
-            SUM(`COL 7`) AS total_wickets,
+            SUM(`Total Runs`) AS total_runs,
+            AVG(`Total Runs`) AS avg_runs,
+            SUM(`Wickets`) AS total_wickets,
             COUNT(*) AS total_players
         FROM sample_data";
 $result = $conn->query($sql);
@@ -15,18 +15,18 @@ $summary = $result->fetch_assoc();
 
 
 // Determine highest run-scorer
-$sql_highest_runs = "SELECT `COL 1` AS player_name, `COL 4` AS total_runs
+$sql_highest_runs = "SELECT `Name` AS player_name, `Total Runs` AS total_runs
                      FROM sample_data
-                     ORDER BY `COL 4` DESC
+                     ORDER BY `Total Runs` DESC
                      LIMIT 1 OFFSET 1";
 $result_highest_runs = $conn->query($sql_highest_runs);
 $highest_run_scorer = $result_highest_runs->fetch_assoc();
 
 
 // Determine highest wicket-taker
-$sql_highest_wickets = "SELECT `COL 1` AS player_name, `COL 7` AS total_wickets
+$sql_highest_wickets = "SELECT `Name` AS player_name, `Wickets` AS total_wickets
                         FROM sample_data
-                        ORDER BY `COL 7` DESC
+                        ORDER BY `Wickets` DESC
                         LIMIT 1 OFFSET 1";
 $result_highest_wickets = $conn->query($sql_highest_wickets);
 $highest_wicket_taker = $result_highest_wickets->fetch_assoc();
