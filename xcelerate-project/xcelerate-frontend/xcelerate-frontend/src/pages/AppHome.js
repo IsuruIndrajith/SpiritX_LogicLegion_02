@@ -1,28 +1,23 @@
 import React, { useState } from 'react';
 import { Route, Routes} from 'react-router-dom';
 
-// Dummy data for players (replace with API calls later)
 const players = [
   { id: 1, name: 'Player 1', university: 'University A', category: 'Batsman', budget: 500000 },
   { id: 2, name: 'Player 2', university: 'University B', category: 'Bowler', budget: 400000 },
-  // Add more players as needed
 ];
 
-// Dummy data for teams (replace with API calls later)
 const initialTeam = {
   players: [],
-  budget: 9000000, // Initial budget
+  budget: 9000000, 
 };
 
 function AppHome() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-  const [team, setTeam] = useState(initialTeam); // Track user's team
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [team, setTeam] = useState(initialTeam); 
 
-  // Simulate login/logout
   const handleLogin = () => setIsLoggedIn(true);
   const handleLogout = () => setIsLoggedIn(false);
 
-  // Add a player to the team
   const addPlayerToTeam = (player) => {
     if (team.players.some((p) => p.id === player.id)) {
       alert('Player already in team!');
@@ -39,7 +34,6 @@ function AppHome() {
     });
   };
 
-  // Remove a player from the team
   const removePlayerFromTeam = (player) => {
     setTeam({
       ...team,
@@ -50,7 +44,6 @@ function AppHome() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navbar */}
       <nav className="bg-blue-600 p-4 text-white">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">Player Management System</h1>
@@ -68,7 +61,6 @@ function AppHome() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <div className="container mx-auto p-4">
         <Routes>
           <Route

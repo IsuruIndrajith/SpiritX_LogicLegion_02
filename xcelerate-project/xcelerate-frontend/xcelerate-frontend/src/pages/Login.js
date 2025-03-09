@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import image1 from '../images/1.png';
 import "../styles/Home.css";
-
+import api from '../api';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "", SId: "" });
+  const [formData, setFormData] = useState({ username: "", password: ""});
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -14,19 +14,21 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
-      const response = await axios.post('/login.php', formData);
+      const response = await api.post('/login.php', formData);
+  
       if (response.data.success) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('team', JSON.stringify(response.data.team));
         localStorage.setItem('token', response.data.token);
+  
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+  
         if (response.data.user.is_admin === 1) {
           navigate('/admin');
         } else {
@@ -36,11 +38,13 @@ const Login = () => {
         setError(response.data.error || 'Login failed');
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err.response?.data?.error || 'Error connecting to server');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-56 bg-[#F8F6F4] py-10 h-[90%]">
@@ -54,8 +58,8 @@ const Login = () => {
           )}
           <form onSubmit={handleSubmit} className="w-full max-w-sm bg-[#B8EEFB] p-4 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
-            <label className="block text-gray-700 text-left">Email:</label>
-            <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="w-full p-2 border rounded mt-2" required />
+            <label className="block text-gray-700 text-left">Name:</label>
+            <input type="username" name="username" placeholder="username" value={formData.Name} onChange={handleChange} className="w-full p-2 border rounded mt-2" required />
             <label className="block text-gray-700 mt-4 text-left">Password:</label>
             <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mt-2" required />
             <div className="text-left mt-4">

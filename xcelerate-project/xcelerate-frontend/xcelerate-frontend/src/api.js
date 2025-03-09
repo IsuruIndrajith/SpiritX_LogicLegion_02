@@ -1,16 +1,41 @@
-// src/api.js
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost/xcelerate-backend/api';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor to add Authorization token if available
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Fetch players
 export const fetchPlayers = async () => {
-    const response = await fetch("http://localhost/xcelerate-backend/api/players.php");
-    if (!response.ok) {
-      throw new Error("Failed to fetch players");
-    }
-    return response.json();
-  };
-  
-  export const fetchPlayerDetails = async (id) => {
-    const response = await fetch(`http://localhost/xcelerate-backend/api/player_details.php?id=${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch player details");
-    }
-    return response.json();
-  };
+  try {
+    const response = await api.get('/players.php');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch players');
+  }
+};
+
+// Fetch player details
+export const fetchPlayerDetails = async (id) => {
+  try {
+    const response = await api.get(`/player_details.php?id=${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch player details');
+  }
+};
+
+export default api;
