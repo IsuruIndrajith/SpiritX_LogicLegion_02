@@ -9,17 +9,24 @@ $result = $conn->query($sql);
 
 <h2>Player List</h2>
 <table border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <th>Name</th>
+        <th>University</th>
+        <th>Category</th>
+        <th>Total Runs</th>
+        <th>Actions</th>
+    </tr>
     <?php if ($result->num_rows > 0): ?>
         <?php while ($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?php echo htmlspecialchars($row['COL 1']); ?></td>
-                <td><?php echo htmlspecialchars($row['COL 2']); ?></td>
-                <td><?php echo htmlspecialchars($row['COL 3']); ?></td>
-                <td><?php echo htmlspecialchars($row['COL 4']); ?></td>
+                <td><?php echo htmlspecialchars($row['Name']); ?></td>
+                <td><?php echo htmlspecialchars($row['University']); ?></td>
+                <td><?php echo htmlspecialchars($row['Category']); ?></td>
+                <td><?php echo htmlspecialchars($row['Total Runs']); ?></td>
                 <td>
-                    <a href="view.php?player_name=<?php echo urlencode($row['COL 1']); ?>">View</a>
-                    <a href="edit.php?player_name=<?php echo urlencode($row['COL 1']); ?>">Edit</a>
-                    <a href="delete.php?player_name=<?php echo urlencode($row['COL 1']); ?>" onclick="return confirm('Are you sure?');">Delete</a>
+                    <a href="view.php?player_name=<?php echo urlencode($row['Name']); ?>">View</a>
+                    <a href="edit.php?player_name=<?php echo urlencode($row['Name']); ?>">Edit</a>
+                    <a href="delete.php?player_name=<?php echo urlencode($row['Name']); ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </td>
             </tr>
         <?php endwhile; ?>

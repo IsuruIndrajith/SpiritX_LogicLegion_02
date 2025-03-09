@@ -28,23 +28,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sample_data` (
-  `COL 1` varchar(22) DEFAULT NULL,
-  `COL 2` varchar(42) DEFAULT NULL,
-  `COL 3` varchar(11) DEFAULT NULL,
-  `COL 4` varchar(10) DEFAULT NULL,
-  `COL 5` varchar(11) DEFAULT NULL,
-  `COL 6` varchar(14) DEFAULT NULL,
-  `COL 7` varchar(7) DEFAULT NULL,
-  `COL 8` varchar(12) DEFAULT NULL,
-  `COL 9` varchar(13) DEFAULT NULL
+  `Name` varchar(22) DEFAULT NULL,
+  `University` varchar(42) DEFAULT NULL,
+  `Category` varchar(11) DEFAULT NULL,
+  `Total Runs` varchar(10) DEFAULT NULL,
+  `Balls Faced` varchar(11) DEFAULT NULL,
+  `Innings Played` varchar(14) DEFAULT NULL,
+  `Wickets` varchar(7) DEFAULT NULL,
+  `Overs Bowled` varchar(12) DEFAULT NULL,
+  `Runs Conceded` varchar(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `sample_data`
 --
 
-INSERT INTO `sample_data` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`, `COL 8`, `COL 9`) VALUES
-('Name', 'University', 'Category', 'Total Runs', 'Balls Faced', 'Innings Played', 'Wickets', 'Overs Bowled', 'Runs Conceded'),
+INSERT INTO `sample_data` (`Name`, `University`, `Category`, `Total Runs`, `Balls Faced`, `Innings Played`, `Wickets`, `Overs Bowled`, `Runs Conceded`) VALUES
 ('Chamika Chandimal', 'University of the Visual & Performing Arts', 'Batsman', '530', '588', '10', '0', '3', '21'),
 ('Dimuth Dhananjaya', 'University of the Visual & Performing Arts', 'All-Rounder', '250', '208', '10', '8', '40', '240'),
 ('Avishka Mendis', 'Eastern University', 'All-Rounder', '210', '175', '7', '7', '35', '210'),

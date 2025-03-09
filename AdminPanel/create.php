@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $overs_bowled = floatval($_POST['overs_bowled']);
     $runs_conceded = intval($_POST['runs_conceded']);
 
-    $sql = "INSERT INTO sample_data (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`, `COL 8`, `COL 9`)
+    $sql = "INSERT INTO sample_data (`Name`, `University`, `Category`, `Total Runs`, `Balls Faced`, `Innings Played`, `Wickets`, `Overs Bowled`, `Runs Conceded`)
             VALUES ('$name', '$university', '$category', $total_runs, $balls_faced, $innings_played, $wickets, $overs_bowled, $runs_conceded)";
             
     if ($conn->query($sql) === TRUE) {

@@ -23,16 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $runs_conceded = intval($_POST['runs_conceded']);
 
     $sql = "UPDATE sample_data SET 
-                `COL 1`='$name', 
-                `COL 2`='$university', 
-                `COL 3`='$category', 
-                `COL 4`=$total_runs, 
-                `COL 5`=$balls_faced, 
-                `COL 6`=$innings_played, 
-                `COL 7`=$wickets, 
-                `COL 8`=$overs_bowled, 
-                `COL 9`=$runs_conceded
-            WHERE `COL 1`='$playerName'";
+        `Name`='$name', 
+        `University`='$university', 
+        `Category`='$category', 
+        `Total Runs`=$total_runs, 
+        `Balls Faced`=$balls_faced, 
+        `Innings Played`=$innings_played, 
+        `Wickets`=$wickets, 
+        `Overs Bowled`=$overs_bowled, 
+        `Runs Conceded`=$runs_conceded
+    WHERE `Name`='$playerName'";
             
     if ($conn->query($sql) === TRUE) {
         echo "<p>Player updated successfully.</p>";
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch the player's current data.
-$sql = "SELECT * FROM sample_data WHERE `COL 1`='$playerName'";
+$sql = "SELECT * FROM sample_data WHERE `Name`='$playerName'";
 $result = $conn->query($sql);
 if ($result->num_rows == 0) {
     echo "<p>Player not found.</p>";
@@ -54,15 +54,15 @@ $player = $result->fetch_assoc();
 
 <h2>Edit Player</h2>
 <form method="post" action="">
-    <label>Name: <input type="text" name="name" value="<?php echo htmlspecialchars($player['COL 1']); ?>" required></label><br>
-    <label>University: <input type="text" name="university" value="<?php echo htmlspecialchars($player['COL 2']); ?>" required></label><br>
-    <label>Category: <input type="text" name="category" value="<?php echo htmlspecialchars($player['COL 3']); ?>" required></label><br>
-    <label>Total Runs: <input type="number" name="total_runs" value="<?php echo htmlspecialchars($player['COL 4']); ?>" required></label><br>
-    <label>Balls Faced: <input type="number" name="balls_faced" value="<?php echo htmlspecialchars($player['COL 5']); ?>" required></label><br>
-    <label>Innings Played: <input type="number" name="innings_played" value="<?php echo htmlspecialchars($player['COL 6']); ?>" required></label><br>
-    <label>Wickets: <input type="number" name="wickets" value="<?php echo htmlspecialchars($player['COL 7']); ?>" required></label><br>
-    <label>Overs Bowled: <input type="text" name="overs_bowled" value="<?php echo htmlspecialchars($player['COL 8']); ?>" required></label><br>
-    <label>Runs Conceded: <input type="number" name="runs_conceded" value="<?php echo htmlspecialchars($player['COL 9']); ?>" required></label><br>
+    <label>Name: <input type="text" name="name" value="<?php echo htmlspecialchars($player['Name']); ?>" required></label><br>
+    <label>University: <input type="text" name="university" value="<?php echo htmlspecialchars($player['University']); ?>" required></label><br>
+    <label>Category: <input type="text" name="category" value="<?php echo htmlspecialchars($player['Category']); ?>" required></label><br>
+    <label>Total Runs: <input type="number" name="total_runs" value="<?php echo htmlspecialchars($player['Total Runs']); ?>" required></label><br>
+    <label>Balls Faced: <input type="number" name="balls_faced" value="<?php echo htmlspecialchars($player['Balls Faced']); ?>" required></label><br>
+    <label>Innings Played: <input type="number" name="innings_played" value="<?php echo htmlspecialchars($player['Innings Played']); ?>" required></label><br>
+    <label>Wickets: <input type="number" name="wickets" value="<?php echo htmlspecialchars($player['Wickets']); ?>" required></label><br>
+    <label>Overs Bowled: <input type="text" name="overs_bowled" value="<?php echo htmlspecialchars($player['Overs Bowled']); ?>" required></label><br>
+    <label>Runs Conceded: <input type="number" name="runs_conceded" value="<?php echo htmlspecialchars($player['Runs Conceded']); ?>" required></label><br>
     <button type="submit">Update Player</button>
 </form>
 
